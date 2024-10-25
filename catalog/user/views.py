@@ -53,6 +53,9 @@ def register(request):
             return redirect("register")
     else:
         return render(request , "user/register.html")
-
+# logout
 def logout(request):
-    return render(request , "user/logout.html")
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.add_message(request,messages.SUCCESS,"Oturumunuz kapatıldı.")
+        return redirect('index')
